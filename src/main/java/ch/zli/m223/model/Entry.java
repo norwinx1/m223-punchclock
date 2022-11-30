@@ -19,6 +19,9 @@ public class Entry {
   @Column(nullable = false)
   private LocalDateTime checkOut;
 
+  @ManyToOne()
+  private Category category;
+
   public Entry() {
   }
 
@@ -55,5 +58,19 @@ public class Entry {
 
   public void setCheckOut(LocalDateTime checkOut) {
     this.checkOut = checkOut;
+  }
+
+  /**
+   * @return the category
+   */
+  public Category getCategory() {
+    return category;
+  }
+
+  /**
+   * @param category the category to set
+   */
+  public void setCategory(Category category) {
+    this.category = category;
   }
 }
