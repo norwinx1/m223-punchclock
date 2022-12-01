@@ -25,6 +25,16 @@ public class Tag {
   @Fetch(FetchMode.JOIN)
   private Set<Entry> entries;
 
+  public Tag() {
+  }
+
+  /**
+   * @param title
+   */
+  public Tag(String title) {
+    this.title = title;
+  }
+
   /**
    * @return the id
    */

@@ -48,6 +48,12 @@ public class Entry {
     this.checkOut = checkOut;
   }
 
+  public Entry(LocalDateTime checkIn, LocalDateTime checkOut, Category category) {
+    this.checkIn = checkIn;
+    this.checkOut = checkOut;
+    this.category = category;
+  }
+
   public Long getId() {
     return id;
   }

@@ -25,6 +25,16 @@ public class Category {
   @Fetch(FetchMode.JOIN)
   private Set<Entry> entries;
 
+  public Category() {
+  }
+
+  /**
+   * @param title
+   */
+  public Category(String title) {
+    this.title = title;
+  }
+
   /**
    * @return the id
    */
