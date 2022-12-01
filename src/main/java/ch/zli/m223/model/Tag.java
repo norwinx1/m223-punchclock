@@ -1,8 +1,14 @@
 package ch.zli.m223.model;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Tag {
@@ -13,6 +19,11 @@ public class Tag {
 
   @Column(nullable = false)
   private String title;
+
+  @ManyToMany(mappedBy = "tags")
+  @JsonIgnoreProperties("tags")
+  @Fetch(FetchMode.JOIN)
+  private Set<Entry> entries;
 
   /**
    * @return the id
@@ -42,6 +53,18 @@ public class Tag {
     this.title = title;
   }
 
-  
+  /**
+   * @return the entries
+   */
+  public Set<Entry> getEntries() {
+    return entries;
+  }
+
+  /**
+   * @param entries the entries to set
+   */
+  public void setEntries(Set<Entry> entries) {
+    this.entries = entries;
+  }
 
 }
