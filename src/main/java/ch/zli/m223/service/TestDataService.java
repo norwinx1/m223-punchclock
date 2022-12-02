@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import ch.zli.m223.model.ApplicationUser;
 import ch.zli.m223.model.Category;
 import ch.zli.m223.model.Entry;
 import ch.zli.m223.model.Tag;
@@ -28,6 +29,7 @@ public class TestDataService {
         entityManager.createNativeQuery("DELETE FROM entry").executeUpdate();
         entityManager.createNativeQuery("DELETE FROM category").executeUpdate();
         entityManager.createNativeQuery("DELETE FROM tag").executeUpdate();
+        entityManager.createNativeQuery("DELETE FROM applicationuser").executeUpdate();
 
         // Categories
         var projectACategory = new Category();
@@ -41,6 +43,10 @@ public class TestDataService {
         var projectCCategory = new Category();
         projectCCategory.setTitle("Project C");
         entityManager.persist(projectCCategory);
+
+        // User
+        var user = new ApplicationUser("User 1", "password");
+        entityManager.persist(user);
 
         // Tags
         var programmingTag = new Tag();
@@ -61,6 +67,7 @@ public class TestDataService {
         firstEntry.setTags(new HashSet<>(Arrays.asList(programmingTag, debuggingTag)));
         firstEntry.setCheckIn(LocalDateTime.now().minusHours(3));
         firstEntry.setCheckOut(LocalDateTime.now().minusHours(2));
+        firstEntry.setUser(user);
         entityManager.persist(firstEntry);
 
         var secondEntry = new Entry();
@@ -68,6 +75,7 @@ public class TestDataService {
         secondEntry.setTags(new HashSet<>(Arrays.asList(meetingTag)));
         secondEntry.setCheckIn(LocalDateTime.now().minusHours(2));
         secondEntry.setCheckOut(LocalDateTime.now().minusHours(1));
+        secondEntry.setUser(user);
         entityManager.persist(secondEntry);
 
         var thirdEntry = new Entry();
@@ -75,6 +83,7 @@ public class TestDataService {
         thirdEntry.setTags(new HashSet<>(Arrays.asList(programmingTag)));
         thirdEntry.setCheckIn(LocalDateTime.now().minusHours(1));
         thirdEntry.setCheckOut(LocalDateTime.now());
+        thirdEntry.setUser(user);
         entityManager.persist(thirdEntry);
     }
 

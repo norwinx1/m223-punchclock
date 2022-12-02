@@ -34,6 +34,10 @@ public class Entry {
   @Fetch(FetchMode.JOIN)
   private Set<Tag> tags;
 
+  @ManyToOne(optional = false)
+  @Fetch(FetchMode.JOIN)
+  private ApplicationUser applicationUser;
+
   public Entry() {
   }
 
@@ -105,5 +109,21 @@ public class Entry {
   public void setTags(Set<Tag> tags) {
     this.tags = tags;
   }
+
+  /**
+   * @return the user
+   */
+  public ApplicationUser getUser() {
+    return applicationUser;
+  }
+
+  /**
+   * @param user the user to set
+   */
+  public void setUser(ApplicationUser user) {
+    this.applicationUser = user;
+  }
+
+  
 
 }
